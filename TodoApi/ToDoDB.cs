@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace TodoApi;
 
 public partial class ToDoDB : DbContext
 {
+    var connectionString = "server=bvktjohaal8zegx4szfp-mysql.services.clever-cloud.com;user=umnezn53mliirmkb;password=ttlQGolvaYooFYT5x2Z1;database=bvktjohaal8zegx4szfp";
+
     public ToDoDB()
     {
     }
@@ -16,7 +19,6 @@ public partial class ToDoDB : DbContext
     }
 
     public virtual DbSet<Item> Items { get; set; }
-var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
