@@ -7,7 +7,7 @@ namespace TodoApi;
 
 public partial class ToDoDB : DbContext
 {
-    var connectionString = "server=bvktjohaal8zegx4szfp-mysql.services.clever-cloud.com;user=umnezn53mliirmkb;password=ttlQGolvaYooFYT5x2Z1;database=bvktjohaal8zegx4szfp";
+     //connectionString = "server=bvktjohaal8zegx4szfp-mysql.services.clever-cloud.com;user=umnezn53mliirmkb;password=ttlQGolvaYooFYT5x2Z1;database=bvktjohaal8zegx4szfp";
 
     public ToDoDB()
     {
@@ -21,7 +21,7 @@ public partial class ToDoDB : DbContext
     public virtual DbSet<Item> Items { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
+        => optionsBuilder.UseMySql("server=bvktjohaal8zegx4szfp-mysql.services.clever-cloud.com;user=umnezn53mliirmkb;password=ttlQGolvaYooFYT5x2Z1;database=bvktjohaal8zegx4szfp", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
