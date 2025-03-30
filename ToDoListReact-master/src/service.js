@@ -1,7 +1,7 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:5087';
+axios.defaults.baseURL = process.env.VARIABLE_NAME;
 
-const apiUrl = "http://localhost:5087"
+const apiUrl = process.env.VARIABLE_NAME;
 
 axios.interceptors.response.use(
   response => {
