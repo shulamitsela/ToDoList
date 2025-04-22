@@ -15,25 +15,26 @@ axios.interceptors.response.use(
 
 export default {
   getTasks: async () => {
-    const result = await axios.get(`/getAll`) 
+    const result = await axios.get(`${apiUrl}/getAll`) 
     console.log(result);
     return result.data;
   },
 
   addTask: async(name)=>{
-    const result = await axios.post(`/add?name=${encodeURIComponent(name)}`);    console.log('addTask', result)
+    const result = await axios.post(`${apiUrl}/add?name=${encodeURIComponent(name)}`);   
+     console.log('addTask', result)
     return result.data;
   },
 
   setCompleted: async(id, isComplete)=>{
-    const result = await axios.put(`/update/${id}`)
+    const result = await axios.put(`${apiUrl}/update/${id}`)
     console.log('setCompleted', {id, isComplete})
     console.log(result.data);    
     return {};
   },
 
   deleteTask:async(id)=>{
-    const result = await axios.delete(`/delete/${id}`)
+    const result = await axios.delete(`${apiUrl}/delete/${id}`)
     console.log('deleteTask')
   }
 };
