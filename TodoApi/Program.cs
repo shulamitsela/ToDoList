@@ -16,14 +16,15 @@ builder.Services.AddCors(option => option.AddPolicy("AllowAll",
     .AllowAnyMethod()
     .AllowAnyHeader()));
 
-builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("ToDoDB"),
-    new MySqlServerVersion(new Version(8, 0, 41))));
-builder.Services.AddControllers();
+
 var app = builder.Build();
 app.UseCors("AllowAll");
+
+
     app.UseSwagger();
     app.UseSwaggerUI();
+
+
 app.MapGet("/getAll", async (ToDoDB context) =>
 await context.Items.ToListAsync());
 
@@ -43,8 +44,4 @@ app.MapDelete("/delete/{id}",async (ToDoDB context,int id) =>
      await context.SaveChangesAsync();} });
 
 app.MapGet("/",() => "ToDoApi is runing!");
-app.UseHttpsRedirection();
-app.MapControllers();
-app.UseAuthentication();
-app.UseAuthorization();
 app.Run();
