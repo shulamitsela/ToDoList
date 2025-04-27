@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ToDoDB>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+    options.UseMySql(builder.Configuration.GetConnectionString("ToDoDB"),
     new MySqlServerVersion(new Version(8, 0, 41))));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -20,8 +20,11 @@ builder.Services.AddCors(option => option.AddPolicy("AllowAll",
 var app = builder.Build();
 app.UseCors("AllowAll");
 
-
-    
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapGet("/getAll", async (ToDoDB context) =>
 await context.Items.ToListAsync());
@@ -42,7 +45,4 @@ app.MapDelete("/delete/{id}",async (ToDoDB context,int id) =>
      await context.SaveChangesAsync();} });
 
 app.MapGet("/",() => "ToDoApi is runing!");
-app.UseSwagger();
-    app.UseSwaggerUI();
-
 app.Run();
