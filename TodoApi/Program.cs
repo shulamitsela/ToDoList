@@ -21,9 +21,7 @@ var app = builder.Build();
 app.UseCors("AllowAll");
 
 
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
+    
 
 app.MapGet("/getAll", async (ToDoDB context) =>
 await context.Items.ToListAsync());
@@ -44,4 +42,7 @@ app.MapDelete("/delete/{id}",async (ToDoDB context,int id) =>
      await context.SaveChangesAsync();} });
 
 app.MapGet("/",() => "ToDoApi is runing!");
+app.UseSwagger();
+    app.UseSwaggerUI();
+
 app.Run();
