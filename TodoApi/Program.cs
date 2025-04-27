@@ -19,11 +19,11 @@ builder.Services.AddDbContext<ToDoDB>(options =>
 
 var app = builder.Build();
 app.UseCors("AllowAll");
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 app.MapGet("/getAll", async (ToDoDB context) =>
 await context.Items.ToListAsync());
